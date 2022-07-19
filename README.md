@@ -12,6 +12,9 @@ This service is solely used for scraping popular website links from [https://web
 
 Start the app by running the following command: 
 
+`cp .env.example .env` <br />
 `docker-compose up`
 
-Then navigate goto:  http://localhost:3000/scrape
+<br />
+
+Then navigate to:  http://localhost:3000/scrape
