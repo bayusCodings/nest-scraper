@@ -1,0 +1,34 @@
+version: "3.2"
+services:
+  cache:
+    image: redis:alpine
+    hostname: cache
+    command: --port 6380
+    ports:
+      - '6380:6380'
+    volumes:
+      - cache:/data
+    networks:
+      - service-network
+
+  web:
+    container_name: scraper-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: scraper-service
+    networks:
+      - service-network
+    depends_on:
+      - cache
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+networks:
+  service-network:
+    driver: bridge
+volumes:
+  cache:
+    driver: local
